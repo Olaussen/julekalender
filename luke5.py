@@ -1,3 +1,5 @@
+import re
+
 def read_data():
     with open('./data/luke5.txt') as f:
         data = f.readlines()
