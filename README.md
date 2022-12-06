@@ -1,4 +1,4 @@
-# Advent of Code (AoC)
+# Advent of Code (AoC)[^aoc]
 
 This repository contains my solutions for this year's Advent of Code :)
 
