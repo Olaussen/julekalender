@@ -1,11 +1,9 @@
 import sys
 sys.setrecursionlimit(10000)
 
-
 def read_data():
     with open('./data/luke7.txt') as f:
         return [x.strip() for x in f.readlines()]
-
 
 class Node:
     def __init__(self, name, parent=None):
