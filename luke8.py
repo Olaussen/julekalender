@@ -4,7 +4,6 @@ def read_data():
     with open('./data/luke8.txt') as f:
         return np.array([np.array(list(x.strip()), dtype=int) for x in f.readlines()])
 
-
 def get_directions(data, i, j):
     return (data[i][:j][::-1], data[i][j+1:], data[:, j][:i][::-1], data[:, j][i+1:])
 
@@ -41,7 +40,6 @@ def part2():
     data = read_data()
     distances = {(i, j): get_view_distance(data, i, j) for i in range(len(data)) for j in range(len(data[i]))}
     print(max([np.prod(distances[distance]) for distance in distances]))
-
 
 if __name__ == '__main__':
     part1()
