@@ -4,21 +4,17 @@ def read_data():
 
 
 def get_value(letter):
-    ascii = ord(letter)
-    if(letter.isupper()):
-        return ascii - 38
-    return ascii - 96
+    return ord(letter) - (38 if letter.isupper() else 96)
 
 def part1():
-    data = read_data()
-    data = [(x[:len(x)//2], x[len(x)//2:]) for x in data]
+    data = [(x[:len(x)//2], x[len(x)//2:]) for x in read_data()]
     total = 0
     for x in data:
         for y in x[0]:
             if y in x[1]:
-                total+= get_value(y)
+                total += get_value(y)
                 break
-    print(total)
+    print("Part 1:", total)
 
 def part2():
     data = read_data()
@@ -29,7 +25,7 @@ def part2():
             if y in x[1] and y in x[2]:
                 total += get_value(y)
                 break
-    print(total)
+    print("Part 2:", total)
 
 if __name__ == '__main__':
     part1()

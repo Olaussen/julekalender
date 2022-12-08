@@ -18,22 +18,11 @@ choose_table = {
 
 def part1():
     data = read_data()
-    total = 0
-    for x in data:
-        x = x.strip().split(' ')
-        score = win_scores[x[0]][x[1]]
-        total += score
-    print(total)
+    print("Part 1:",sum([win_scores[x.strip().split(' ')[0]][x.strip().split(' ')[1]] for x in data]))
 
 def part2():
     data = read_data()
-    total = 0
-    for x in data:
-        x = x.strip().split(' ')
-        choice = choose_table[x[0]][x[1]]
-        score = win_scores[x[0]][choice]
-        total += score
-    print(total)
+    print("Part 2:", sum([win_scores[x.strip().split(' ')[0]][choose_table[x.strip().split(' ')[0]][x.strip().split(' ')[1]]] for x in data]))
 
 if __name__ == '__main__':
     part1()

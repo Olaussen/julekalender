@@ -14,32 +14,21 @@ def is_visible(data, i, j):
         return True
     return tree > max(row1) or tree > max(row2) or tree > max(col1) or tree > max(col2)
 
-def part1():
-    data = read_data()
-    print(sum([1 for i in range(len(data)) for j in range(len(data[i])) if is_visible(data, i, j)]))
-
 def get_direction_distance(trees, tree):
-    for i in range(len(trees)):
-        if trees[i] >= tree or i == len(trees) - 1:
-            return i + 1
-    return 0
+    return next((i + 1 for i in range(len(trees)) if trees[i] >= tree or i == len(trees) - 1), 0)
 
 def get_view_distance(data, i, j):
     row1, row2, col1, col2 = get_directions(data, i, j)
     tree = data[i][j]
+    return [get_direction_distance(col1, tree), get_direction_distance(row1, tree), get_direction_distance(col2, tree), get_direction_distance(row2, tree)]
 
-    up = get_direction_distance(col1, tree)
-    left = get_direction_distance(row1, tree)
-    down = get_direction_distance(col2, tree)
-    right = get_direction_distance(row2, tree)
-    distances = [up, left, down, right]
-
-    return distances
+def part1():
+    data = read_data()
+    print("Part 1:", sum([1 for i in range(len(data)) for j in range(len(data[i])) if is_visible(data, i, j)]))
 
 def part2():
     data = read_data()
-    distances = {(i, j): get_view_distance(data, i, j) for i in range(len(data)) for j in range(len(data[i]))}
-    print(max([np.prod(distances[distance]) for distance in distances]))
+    print("Part 2:", max([np.prod(get_view_distance(data, i, j)) for i in range(len(data)) for j in range(len(data[i]))]))
 
 if __name__ == '__main__':
     part1()
