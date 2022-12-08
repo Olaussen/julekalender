@@ -4,23 +4,21 @@ def read_data():
     with open('./data/luke8.txt') as f:
         return np.array([np.array(list(x.strip()), dtype=int) for x in f.readlines()])
 
-def get_directions(data, i, j):
-    return (data[i][:j][::-1], data[i][j+1:], data[:, j][:i][::-1], data[:, j][i+1:])
-
 def is_visible(data, i, j):
-    row1, row2, col1, col2 = get_directions(data, i, j)
     tree = data[i][j]
     if i == 0 or i == len(data) - 1 or j == 0 or j == len(data[i]) - 1:
         return True
-    return tree > max(row1) or tree > max(row2) or tree > max(col1) or tree > max(col2)
+    return tree > max(data[i][:j][::-1]) or tree > max(data[i][j+1:]) or tree > max(data[:, j][:i][::-1]) or tree > max(data[:, j][i+1:])
 
 def get_direction_distance(trees, tree):
     return next((i + 1 for i in range(len(trees)) if trees[i] >= tree or i == len(trees) - 1), 0)
 
 def get_view_distance(data, i, j):
-    row1, row2, col1, col2 = get_directions(data, i, j)
     tree = data[i][j]
-    return [get_direction_distance(col1, tree), get_direction_distance(row1, tree), get_direction_distance(col2, tree), get_direction_distance(row2, tree)]
+    return [get_direction_distance(data[:, j][:i][::-1], tree), 
+            get_direction_distance(data[i][:j][::-1], tree), 
+            get_direction_distance(data[:, j][i+1:], tree), 
+            get_direction_distance(data[i][j+1:], tree)]
 
 def part1():
     data = read_data()
