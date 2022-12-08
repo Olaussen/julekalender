@@ -43,7 +43,6 @@ def extract_tree(data=read_data()[1:]):
             current.add_file(tokens[1], int(tokens[0]))
     return tree
 
-
 def get_directory_sizes(tree):
     sizes = []
     def get_sizes(node):
@@ -67,11 +66,11 @@ def find_elibile_dirs(tree, size_to_delete):
 
 def part1():
     tree = extract_tree()
-    print("Part 1:", {sum([size for size in get_directory_sizes(tree) if 100000 > size])})
+    print("Part 1:", sum([size for size in get_directory_sizes(tree) if 100000 > size]))
 
 def part2():
     tree = extract_tree()
-    print("Part 2:", {sorted([dir.size() for dir in find_elibile_dirs(tree, 30000000 - (70000000 - tree.size()))])[0]})
+    print("Part 2:", sorted([dir.size() for dir in find_elibile_dirs(tree, 30000000 - (70000000 - tree.size()))])[0])
 
 if __name__ == '__main__':
     part1()
