@@ -25,7 +25,7 @@ def part2():
 
     def do_cycle():
         nonlocal t
-        print("#" if t % 40 in (X - 1, X, X + 1) else ".", end="")
+        print("#" if t % 40 in (X - 1, X, X + 1) else " ", end="")
         t += 1; print() if t % 40 == 0 else None
 
     print("Part 2")
