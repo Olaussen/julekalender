@@ -19,7 +19,6 @@ def part1():
                 signal += cycle * X if cycle in (20, 60, 100, 140, 180, 220) else 0
     print("Part 1:", signal)
 
-
 def part2():
     X = 1
     t = 0
