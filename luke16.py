@@ -21,6 +21,7 @@ def read_data():
 
 def best_flow(start, time, elephant):
     valves, dist = read_data()
+    
     @cache
     def find_best_flow(current, time, remaining, elephant):
         best_flow = find_best_flow("AA", 26, remaining, False) if elephant else 0
@@ -32,7 +33,6 @@ def best_flow(start, time, elephant):
     return find_best_flow(start, time, frozenset(x for x in valves if valves[x] > 0), elephant)
 
 def part1():
-
     print("Part 1:", best_flow("AA", 30, False))
 
 def part2():
