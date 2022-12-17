@@ -72,7 +72,7 @@ def part2():
 
         try:
             old_t, old_max_y = last[rock_index, wind_index, heights]
-            floor = {p + timestep // (old_t - timestep) * (max_y - old_max_y) * 1j for p in floor}
+            floor = {part + timestep // (old_t - timestep) * (max_y - old_max_y) * 1j for part in floor}
             timestep %= old_t - timestep
         except KeyError:
             last[rock_index, wind_index, heights] = timestep, max_y
