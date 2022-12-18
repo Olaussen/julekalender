@@ -58,8 +58,7 @@ def perform(timestep):
 def part1():
     print("Part 1:", perform(2022))
 
-def part2():
-            
+def part2(): 
     print("Part 2:", perform(1000000000000))
 
 if __name__ == "__main__":
