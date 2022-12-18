@@ -18,35 +18,11 @@ ROCKS = [
 def highest(grid):
     return int(max(p.imag for p in grid))
 
-def part1():
-    data = read_data()
-    floor = set(x - 1j for x in range(7))
-    falling_rocks = cycle(ROCKS)
-
-    for _ in range(2022):
-        start = 2 + (4 + highest(floor)) * 1j
-        rock = {start + part for part in next(falling_rocks)}
-
-        while True:
-            next_wind = next(data)
-            new_rock = {part + next_wind[1] for part in rock}
-            if not new_rock & floor and all(0 <= part.real <= 6 for part in new_rock):
-                rock = new_rock
-
-            new_rock = {part - 1j for part in rock}
-            if floor & new_rock:
-                floor.update(rock)
-                break
-            rock = new_rock
-
-    print("Part 1:", highest(floor) + 1)
-
-def part2():
+def perform(timestep):
     data = read_data()
     floor = set(x - 1j for x in range(7))
     falling_rocks = cycle(enumerate(ROCKS))
     last = {}
-    timestep = 1000000000000
 
     while timestep > 0:
         start = 2 + (4 + highest(floor)) * 1j
@@ -76,8 +52,15 @@ def part2():
             timestep %= old_t - timestep
         except KeyError:
             last[rock_index, wind_index, heights] = timestep, max_y
+
+    return highest(floor) + 1
+
+def part1():
+    print("Part 1:", perform(2022))
+
+def part2():
             
-    print("Part 2:", highest(floor) + 1)
+    print("Part 2:", perform(1000000000000))
 
 if __name__ == "__main__":
     part1()
