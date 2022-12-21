@@ -24,18 +24,17 @@ def extract_monkeys():
                 vals[name] = a, b, *OPERATIONS[op]
     return vals
 
-def calc(vals, i):
-    match vals[i]:
-        case a, b, f, _, _:
-            av, bv = calc(vals, a), calc(vals, b)
-            if None in (av, bv):
-                return None
-            return f(av, bv)
+def calculate(monkeys, key):
+    it = monkeys[key]
+    match it:
+        case left, right, op, _, _:
+            left_result, right_result = calculate(monkeys, left), calculate(monkeys, right)
+            return None if None in (left_result, right_result) else op(left_result, right_result)
         case _:
-            return vals[i]
+            return it
 
 def part1():
-    print("Part 1:", int(calc(extract_monkeys(), "root")))
+    print("Part 1:", int(calculate(extract_monkeys(), "root")))
 
 def part2():
     monkeys = extract_monkeys()
@@ -45,7 +44,7 @@ def part2():
     def solve(key, value):
         match monkeys[key]:
             case left, right, _, funca, funcb:
-                match calc(monkeys, left), calc(monkeys, right):
+                match calculate(monkeys, left), calculate(monkeys, right):
                     case left_result, None:
                         return solve(right, funcb(value, left_result))
                     case None, right_result:
