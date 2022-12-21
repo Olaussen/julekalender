@@ -35,7 +35,7 @@ def calc(vals, i):
             return vals[i]
 
 def part1():
-    print("Part 1", int(calc(extract_monkeys(), "root")))
+    print("Part 1:", int(calc(extract_monkeys(), "root")))
 
 def part2():
     monkeys = extract_monkeys()
@@ -53,7 +53,7 @@ def part2():
             case None:
                 return value
 
-    print("Part 2", int(solve("root", 0)))
+    print("Part 2:", int(solve("root", 0)))
 
 if __name__ == "__main__":
     part1()
