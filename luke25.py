@@ -22,9 +22,5 @@ def reverse_snafu(total):
 def part1():
     print("Part 1:",  reverse_snafu(sum(get_snafu(line) for line in read_data())))
 
-def part2():
-    print("Part 2:")
-
 if __name__ == "__main__":
     part1()
-    part2()
